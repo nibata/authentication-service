@@ -11,7 +11,7 @@ permissions:
   contents: write
   statuses: write
 jobs:
-  build:
+  coverage-test:
 
     runs-on: ubuntu-latest
 

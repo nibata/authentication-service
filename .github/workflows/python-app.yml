@@ -96,4 +96,14 @@ jobs:
         pytest-xml-coverage-path: ./app/coverage.xml
 
     - name: Check Threshold Coverage
-      run: echo "Current Coverage - ${{ steps.coverageComment.outputs.coverage }}"
+      run: | 
+        THRESHOLD=95
+        PERCENTAGE=${{ steps.coverageComment.outputs.coverage }}
+        PERCENTAGE_VALUE=${PERCENTAGE%\%}
+        
+        if [ "$PERCENTAGE_VALUE" -lt "$THRESHOLD" ]; then
+          echo "Percentage ($PERCENTAGE) is less than $THRESHOLD%"
+          exit 1
+        else
+          echo "Percentage ($PERCENTAGE) is greater than or equal to $THRESHOLD%"
+        fi

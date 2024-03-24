@@ -67,7 +67,6 @@ jobs:
         CRYPTO_KEY: ${{ secrets.CRYPTO_KEY_TEST}}
         DB_ASYNC_TEST: postgresql+asyncpg://postgres:postgrespw@localhost:5432/auth
         DB_TEST: postgresql+asyncpg://postgres:postgrespw@localhost:5432/auth
-
     - name: Unit Test
       working-directory: ./app
       run: pytest --junitxml=res-test.xml --cov=api --cov-report=xml:coverage.xml

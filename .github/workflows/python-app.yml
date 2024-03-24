@@ -88,8 +88,12 @@ jobs:
         DB_TEST: postgresql+asyncpg://postgres:postgrespw@localhost:5432/auth
 
     - name: Publish Test Report
+      id: coverageComment
       uses: MishaKav/pytest-coverage-comment@main
       if: success() || failure()
       with:
         junitxml-path: ./app/res-test.xml
         pytest-xml-coverage-path: ./app/coverage.xml
+
+    - name: Check Threshold Coverage
+      run: echo "Current Coverage - ${{ steps.coverageComment.outputs.coverage }}"
